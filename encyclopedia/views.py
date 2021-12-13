@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from . import util
 from markdown import markdown
+
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -17,3 +18,10 @@ def title(request, title):
         "title": title.capitalize(),
         "entry": markdown(util.get_entry(title))
     })
+
+def search(request):
+    search = request.GET.get('q')
+    test = util.get_entry(search)
+    if test is None:
+        return render(request, "encyclopedia/search.html")
+    return redirect('title', search)
