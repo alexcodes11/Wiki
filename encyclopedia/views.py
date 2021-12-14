@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from . import util
 from markdown import markdown
+import re
 
 
 def index(request):
@@ -19,9 +20,18 @@ def title(request, title):
         "entry": markdown(util.get_entry(title))
     })
 
+
 def search(request):
     search = request.GET.get('q')
     test = util.get_entry(search)
+    entries = util.list_entries()
     if test is None:
-        return render(request, "encyclopedia/search.html")
+        found = []
+        for entry in entries:
+            if re.search(search.lower(), entry.lower()):
+                found.append(entry)
+        return render(request, "encyclopedia/search.html", {
+            "search": search,
+            "found" : found
+        })
     return redirect('title', search)
