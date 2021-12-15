@@ -1,0 +1,21 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block body %}
+    {% if not found %}
+        <h1>{{search}} was not found</h1>
+        <p>if you would like to add this click the edit button.</p>
+    {% else %}
+        <h1>Search results for: {{search}} </h1>
+    {% endif %}
+
+    <ul>
+    {% for f in found%}
+        <a href="{% url 'title' f %}"><li>{{f}}</li></a>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

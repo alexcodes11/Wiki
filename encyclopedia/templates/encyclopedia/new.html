@@ -1,0 +1,35 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page
+{% endblock %}
+
+{% block body %}
+
+    <h1 style="margin: auto; width: 60%;">Create New Page</h1>
+    <br>
+    {% if messages %}
+    {% for message in messages%}
+    <div class="alert alert-danger" role="alert" style="margin: auto; width: 80%;">
+        {{message}} <a href="{% url 'editpage' title %}" class="alert-link">click here to edit the current {{title}} Wiki Page</a> 
+    </div> 
+    <br>
+    {% endfor %}
+    {% endif %}
+
+<div style=" margin: auto; width: 60%;">
+    <form action="" method="post">
+         {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Title of Wiki Page" name="title" value="{{title}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea3"></label>
+            <textarea placeholder="Wiki information here"class="form-control" id="exampleFormControlTextarea3" rows="15" name="text" >{{content}}</textarea>
+        </div>
+        <div style="display:flex;  justify-content:right;">
+        <button type="submit" class="btn btn-secondary btn-lg">Save Page</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
