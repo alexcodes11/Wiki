@@ -57,5 +57,19 @@ def newpage(request):
             messages.info(request, 'This page already exists! You can either change the title of your new Wiki Page or ')
             return render(request, "encyclopedia/new.html", {
                 "title": pagetitle,
-                "content": content
+                "content": content,
             })
+
+def editpage(request, title):
+    if request.method == "GET":
+        entry = util.get_entry(title)
+        return render(request, "encyclopedia/editpage.html", {
+            "title": title, 
+            "content": entry
+        })
+    # note to self. In case you forget the above code works. You just need to make the edit button work.
+    if request.method == "POST":
+        content = request.POST.get('text')
+        util.save_entry(title, content)
+        return redirect('title', title)
+
