@@ -5,6 +5,9 @@
 {% endblock %} 
 
 {% block body %}
+<form action="{% url 'editpage' title %}" method="get">
+    <button type="submit" class="btn btn-secondary btn-sm">Edit Page</button>
+</form>
 <h1>{{title}} was not found...</h1>
 <p>If you want to add it... click the edit button</p>
 {% endblock %}

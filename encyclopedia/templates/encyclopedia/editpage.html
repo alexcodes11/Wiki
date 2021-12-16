@@ -5,16 +5,17 @@
 {% endblock %}
 
 {% block body %}
-<h1>Editing {{title}} Page</h1>
+
 <div style=" margin: auto; width: 60%;">
 <form action="" method="post">
+    <h1>Editing {{title}} Page</h1>
          {% csrf_token %}
         <div class="form-group">
             <label for="exampleFormControlTextarea3"></label>
             <textarea placeholder="Wiki information here"class="form-control" id="exampleFormControlTextarea3" rows="15" name="text" >{{content}}</textarea>
         </div>
         <div style="display:flex;  justify-content:right;">
-        <button type="submit" class="btn btn-secondary btn-lg">Edit Page</button>
+        <button type="submit" class="btn btn-secondary">Edit Page</button>
         </div>
     </form>
 </div>

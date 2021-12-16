@@ -5,5 +5,8 @@
 {% endblock %}
 
 {% block body %}
+<form action="{% url 'editpage' title %}" method="get">
+    <button type="submit" class="btn btn-secondary btn-sm">Edit Page</button>
+</form>
     {{entry | safe }}
 {% endblock %}
